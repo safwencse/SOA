@@ -13,7 +13,6 @@ const CRUDSection = () => {
   const [message, setMessage] = useState('');
   const [errors, setErrors] = useState([]);
 
-  // Fetch all persons on component mount
   useEffect(() => {
     fetchPersons();
   }, []);
@@ -40,7 +39,6 @@ const CRUDSection = () => {
       [name]: name === 'age' ? parseInt(value) || '' : value
     }));
     
-    // Clear errors when user starts typing
     if (errors.length > 0) {
       setErrors([]);
     }
@@ -49,7 +47,6 @@ const CRUDSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Validate form data
     const validationErrors = validatePersonData(formData);
     if (validationErrors.length > 0) {
       setErrors(validationErrors);
@@ -57,7 +54,6 @@ const CRUDSection = () => {
       return;
     }
     
-    // Prepare data for API
     const personData = {
       name: formData.name.trim(),
       age: parseInt(formData.age)
@@ -68,10 +64,8 @@ const CRUDSection = () => {
       setErrors([]);
       
       if (editingId) {
-        // Update existing person
         const result = await apiService.updatePerson(editingId, personData);
         
-        // Update local state with the updated person
         setPersons(persons.map(person => 
           person.id === editingId ? { ...person, ...personData } : person
         ));
@@ -79,11 +73,9 @@ const CRUDSection = () => {
         setMessage(result.message || 'Person updated successfully!');
         setEditingId(null);
       } else {
-        // Create new person
         const result = await apiService.createPerson(personData);
         
-        // Since your API doesn't return the created person with ID,
-        // we'll add it to the local state with a temporary ID
+        
         const newPerson = {
           id: persons.length > 0 ? Math.max(...persons.map(p => p.id)) + 1 : 1,
           ...personData
@@ -93,7 +85,6 @@ const CRUDSection = () => {
         setMessage(result.message || 'Person created successfully!');
       }
 
-      // Reset form
       setFormData({
         name: '',
         age: ''
@@ -154,7 +145,7 @@ const CRUDSection = () => {
         {/* Server Status 
         <div className="server-status">
           <span className="status-label">API Base URL:</span>
-          <code className="api-url">http://localhost:8080/TP4-JPA-REST/persons</code>
+          <code className="api-url">http://localhost:8080/TP4/persons</code>
           <button 
             onClick={fetchPersons} 
             className="btn-test"

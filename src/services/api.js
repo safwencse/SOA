@@ -1,9 +1,6 @@
-// Base URL for your Tomcat REST service
 const API_BASE_URL = 'http://localhost:8080/TP4/persons';
 
-// CRUD API calls for Person entity
 export const apiService = {
-  // CREATE - POST request
   async createPerson(personData) {
     const response = await fetch(API_BASE_URL, {
       method: 'POST',
@@ -15,21 +12,18 @@ export const apiService = {
     return { success: true, message, data: personData };
   },
 
-  // READ - GET all persons
   async getAllPersons() {
     const response = await fetch(API_BASE_URL);
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     return await response.json();
   },
 
-  // READ - GET single person by ID
   async getPersonById(id) {
     const response = await fetch(`${API_BASE_URL}/${id}`);
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     return await response.json();
   },
 
-  // UPDATE - PUT request
   async updatePerson(id, personData) {
     const response = await fetch(`${API_BASE_URL}/${id}`, {
       method: 'PUT',
@@ -41,7 +35,6 @@ export const apiService = {
     return { success: true, message, data: { id: parseInt(id), ...personData } };
   },
 
-  // DELETE - DELETE request
   async deletePerson(id) {
     const response = await fetch(`${API_BASE_URL}/${id}`, { method: 'DELETE' });
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -50,7 +43,6 @@ export const apiService = {
   },
 };
 
-// Helper function to validate person data
 export const validatePersonData = (personData) => {
   const errors = [];
   if (!personData.name || personData.name.trim() === '') errors.push('Name is required');

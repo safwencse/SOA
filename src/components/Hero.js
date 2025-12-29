@@ -22,7 +22,7 @@ const Hero = () => {
         <div className="hero-image">
           <div className="placeholder-image">
             <span>📊</span>
-            <p>Interactive CRUD Demo Below</p>
+            <p>Interactive DEMO </p>
           </div>
         </div>
       </div>
