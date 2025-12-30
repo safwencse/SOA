@@ -1,70 +1,107 @@
-# Getting Started with Create React App
+# Person Management Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A clean, modern React dashboard for managing Person entities through a REST API. This single-page application provides a user-friendly interface for performing all CRUD operations on person data.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Full CRUD operations (Create, Read, Update, Delete)
+- Real-time REST API integration
+- Responsive design (desktop, tablet, mobile)
+- Form input validation
+- Loading indicators and success/error messages
+- Built-in API endpoint reference
 
-### `npm start`
+## Quick Start
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Prerequisites
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Node.js v14 or higher
+- npm or yarn
+- Tomcat server running on port 8080
+- REST API deployed at http://localhost:8080/TP4/persons
 
-### `npm test`
+### Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Clone the repository and install dependencies:
+ 
+npm install  
+npm start  
 
-### `npm run build`
+Make sure your backend is running:
+- Start Tomcat
+- Deploy the TP4 web application
+- Verify the API is accessible at http://localhost:8080/TP4/persons
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Open the application in your browser:
+http://localhost:3000
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## API Configuration
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The application uses the following REST endpoints:
 
-### `npm run eject`
+GET /persons → Fetch all persons  
+POST /persons → Create a new person  
+PUT /persons/{id} → Update an existing person  
+DELETE /persons/{id} → Delete a person  
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Example Requests
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Create Person (POST):
+{
+  "name": "John Doe",
+  "age": 30
+}
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Update Person (PUT):
+{
+  "name": "Jane Smith",
+  "age": 28
+}
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## How to Use
 
-## Learn More
+Adding a person:
+- Enter name and age
+- Click "Create Person"
+- The person appears instantly in the list
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Editing a person:
+- Click "Edit"
+- Modify fields
+- Click "Update Person"
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Deleting a person:
+- Click "Delete"
+- Confirm deletion
 
-### Code Splitting
+Refreshing data:
+- Click "Refresh" to reload data
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Troubleshooting
 
-### Analyzing the Bundle Size
+CORS error:
+Add this annotation to your Java REST controller:
+@CrossOrigin(origins = "http://localhost:3000")
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+API connection failed:
+- Ensure Tomcat is running on port 8080
+- Verify TP4 is deployed
+- Test http://localhost:8080/TP4/persons directly
 
-### Making a Progressive Web App
+Form issues:
+- Name and Age are required
+- Age must be a positive number
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Project Structure
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+src/
+    components/
+        Header.js
+        Hero.js
+        Features.js
+        CRUDSection.js
+        Footer.js
+services/
+    api.js
+App.js
+App.css
